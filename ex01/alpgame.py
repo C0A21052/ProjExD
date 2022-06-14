@@ -5,7 +5,8 @@ import datetime
 al = 5
 ak = 10
 aj = 2
-def main():
+def main(a):
+    global a
     st = datetime.datetime.now()
     for _ in range(al):
         seikai = shutudai()
@@ -13,7 +14,8 @@ def main():
     ed = datetime.datetime.now()
     print(f"{(ed-st).seconds}秒かかりました")
 
-def shutudai():
+def shutudai(b):
+    global b
     alp_list = [chr(ord("a")+i) for i in range(26)]
     all_char_lst = random.sample(alp_list, ak)
     print(f"対象文字：{all_char_lst}")
@@ -24,6 +26,7 @@ def shutudai():
 
 
 def kaitou(seikai):
+    global seiseki
     num = int(input("欠損文字はいくつあるでしょうか？"))
     if num != aj:
         print("不正解です、またチャレンジしてね")
