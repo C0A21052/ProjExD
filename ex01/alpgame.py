@@ -35,6 +35,8 @@ def kaitou(seikai):
         print("正解です。それでは具体的に欠損文字を一つずつ入力してください")
         for i  in range(aj):
             c = input()
-
+if __name__ == "__main__":
+    shutudai()
+    kaitou()
 
 
