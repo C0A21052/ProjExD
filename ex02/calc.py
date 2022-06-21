@@ -11,24 +11,22 @@ def button_click(event):
         entry.insert(tk.END,re)
     elif num == "C":
         entry.delete(0,tk.END)
+
     elif num == "%":
         sub=entry.get()
         entry.delete(0,tk.END)
         ans = int(sub)*100
         return entry.insert(tk.END,ans)
 
-        
     elif num == "♡":
         return entry.insert(tk.END,"大好き♡")
+
     elif num == "( ﾉД`)":
         return entry.insert(tk.END,"嫌い。。。")
 
-
-            
-        
-
     else:
         entry.insert(tk.END,num)
+        
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("超高機能電卓")
