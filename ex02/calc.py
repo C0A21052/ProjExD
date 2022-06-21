@@ -26,14 +26,14 @@ def button_click(event):
 
     else:
         entry.insert(tk.END,num)
-        
+
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("超高機能電卓")
     entry=tk.Entry(root, justify="right",width=10,font=("Times New Roman",40))
     entry.grid(column=0,columnspan=5)
     r,c=1,0
-    for i, num in enumerate(["%","-","÷","del",7,8,9,"=",4,5,6,"+",1,2,3,"C",0,"♡","( ﾉД`)","×"]):
+    for i, num in enumerate(["%","-","÷","del",7,8,9,"=",4,5,6,"+",1,2,3,"C",0,"♡","( ﾉД`)","*"]):
         button = tk.Button(root,text=f"{num}", width=4,height=2, font=("Times New Roman", 30))
         button.bind("<1>",button_click)
         button.grid(row=r,column=c)
