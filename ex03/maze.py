@@ -20,11 +20,6 @@ def make_maze(yoko, tate):
         maze_lst[y][0] = 1
         maze_lst[yoko][yoko-1] = 1
 
-
-
-
-
-
 def key_down(event):
     global key
     key = event.keysym
@@ -50,6 +45,7 @@ def main_proc():
     cx, cy = mx*100+50, my*100+50
     canvas.coords("tori", cx, cy)
     root.after(100,main_proc)
+
 
 
 
