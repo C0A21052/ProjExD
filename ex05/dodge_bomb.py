@@ -1,7 +1,9 @@
 import pygame as pg
 import sys
 import random
-
+import tkinter as tk
+import tkinter.messagebox as tkm
+import time
 
 class Screen:
     def __init__(self, title, wh, image):
@@ -71,8 +73,50 @@ class Bomb:
         # 練習5
         self.blit(scr)          
 
+class hard:
+    def __init__(self, color, size, vxy, scr: Screen):
+        self.sfc = pg.Surface((2*size, 2*size)) # Surface
+        self.sfc.set_colorkey((0, 0, 0)) 
+        pg.draw.circle(self.sfc, color, (size, size), size)
+        self.rct = self.sfc.get_rect() # Rect
+        self.rct.centerx = random.randint(0, scr.rct.width)
+        self.rct.centery = random.randint(0, scr.rct.height)
+        self.vx, self.vy = vxy # 練習6
+
+    def blit(self, scr: Screen):
+        scr.sfc.blit(self.sfc, self.rct)
+
+    def update(self, scr: Screen):
+        # 練習6
+        self.rct.move_ip(self.vx, self.vy)
+        # 練習7
+        yoko, tate = check_bound(self.rct, scr.rct)
+        self.vx *= yoko
+        self.vy *= tate   
+        # 練習5
+        self.blit(scr)     
+
+class Exp(pg.sprite.Sprite):
+
+    defaultlife = 12
+    animcycle = 3
+    images = []
+
+    def __init__(self, actor):
+        pg.sprite.Sprite.__init__(self, self.containers)
+        self.image = self.images[0]
+        self.rect = self.image.get_rect(center=actor.rect.center)
+        self.life = self.defaultlife
+
+    def update(self):
+        
+        self.life = self.life - 1
+        self.image = self.images[self.life // self.animcycle % 2]
+        if self.life <= 0:
+            self.kill()
 
 def main():
+    time_start = time.time()
     clock = pg.time.Clock()
     scr = Screen("逃げろ！こうかとん", (1600, 900), "ex03/fig/pg_bg.jpg")
     kkt = Bird("ex03/fig/6.png", 2.0, (900, 400))
@@ -87,7 +131,14 @@ def main():
 
         kkt.update(scr)
         bkd.update(scr)
+
+        if time_start >= 10:
+            hard.update(scr)
         if kkt.rct.colliderect(bkd.rct):
+            Exp.update(scr)
+            time_end = time.time()
+            tkm.showinfo("君の挑戦はここまでだ")
+            
             return
 
         pg.display.update()
